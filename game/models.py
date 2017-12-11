@@ -6,20 +6,33 @@ class Effect(models.Model):
 	consequences = JSONField()
 	description = models.CharField(max_length=100)
 
+	class Meta:
+		verbose_name_plural = "Effects"
+
 class Skill(models.Model):
 	name = models.CharField(max_length=20)
 	duration = models.IntegerField()
 	effects = models.ManyToManyField(Effect)
 	description = models.CharField(max_length=100)
 
+	class Meta:
+		verbose_name_plural = "Skills"
+
 class Breed(models.Model):
 	name = models.CharField(max_length=20)
+	habitat = models.CharField(max_length=20, default='Forest')
 	mean_height = models.FloatField()
 	passive_skill = models.ManyToManyField(Skill)
 	description = models.CharField(max_length=200)
 
+	class Meta:
+		verbose_name_plural = "Breeds"
+
 class Clothes_family(models.Model):
 	name = models.CharField(max_length=20)
+
+	class Meta:
+		verbose_name_plural = "Clothes_Families"
 
 class Clothes(models.Model):
 	name = models.CharField(max_length=20)
@@ -33,9 +46,15 @@ class Clothes(models.Model):
 	weight = models.IntegerField()
 	extras = JSONField()
 
+	class Meta:
+		verbose_name_plural = "Clothes"
+
 class Weapons_family(models.Model):
 	name = models.CharField(max_length=20)
 	range = models.IntegerField()
+
+	class Meta:
+		verbose_name_plural = "Weapons_families"
 
 class Weapon(models.Model):
 	choices_hand = (
@@ -55,9 +74,15 @@ class Weapon(models.Model):
 	)
 	extras = JSONField()
 
+	class Meta:
+		verbose_name_plural = "Weapons"
+
 class Class(models.Model):
 	name = models.CharField(max_length=20)
 	weapons = models.ManyToManyField(Weapons_family)
 	skills = models.ManyToManyField(Skill)
 	clothes = models.ManyToManyField(Clothes_family)
 	description = models.CharField(max_length=200)
+
+	class Meta:
+		verbose_name_plural = "Classes"
