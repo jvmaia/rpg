@@ -72,6 +72,7 @@ class Weapon(models.Model):
 		choices=choices_hand,
 		max_length=1
 	)
+	damage = models.IntegerField(default=0)
 	extras = JSONField()
 
 	class Meta:
