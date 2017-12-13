@@ -6,6 +6,9 @@ class Effect(models.Model):
 	consequences = JSONField()
 	description = models.CharField(max_length=100)
 
+	def __str__(self):
+		return self.name
+
 	class Meta:
 		verbose_name_plural = "Effects"
 
@@ -14,6 +17,9 @@ class Skill(models.Model):
 	duration = models.IntegerField()
 	effects = models.ManyToManyField(Effect)
 	description = models.CharField(max_length=100)
+
+	def __str__(self):
+		return self.name
 
 	class Meta:
 		verbose_name_plural = "Skills"
@@ -25,11 +31,17 @@ class Breed(models.Model):
 	passive_skill = models.ManyToManyField(Skill)
 	description = models.CharField(max_length=200)
 
+	def __str__(self):
+		return self.name
+
 	class Meta:
 		verbose_name_plural = "Breeds"
 
 class Clothes_family(models.Model):
 	name = models.CharField(max_length=20)
+
+	def __str__(self):
+		return self.name
 
 	class Meta:
 		verbose_name_plural = "Clothes_Families"
@@ -46,12 +58,18 @@ class Clothes(models.Model):
 	weight = models.IntegerField()
 	extras = JSONField()
 
+	def __str__(self):
+		return self.name
+
 	class Meta:
 		verbose_name_plural = "Clothes"
 
 class Weapons_family(models.Model):
 	name = models.CharField(max_length=20)
 	range = models.IntegerField()
+
+	def __str__(self):
+		return self.name
 
 	class Meta:
 		verbose_name_plural = "Weapons_families"
@@ -75,6 +93,9 @@ class Weapon(models.Model):
 	damage = models.IntegerField(default=0)
 	extras = JSONField()
 
+	def __str__(self):
+		return self.name
+
 	class Meta:
 		verbose_name_plural = "Weapons"
 
@@ -84,6 +105,9 @@ class Class(models.Model):
 	skills = models.ManyToManyField(Skill)
 	clothes = models.ManyToManyField(Clothes_family)
 	description = models.CharField(max_length=200)
+
+	def __str__(self):
+		return self.name
 
 	class Meta:
 		verbose_name_plural = "Classes"
