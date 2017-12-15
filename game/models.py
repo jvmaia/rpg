@@ -1,5 +1,16 @@
 from django.db import models
+from django.contrib.auth.models import AbstractUser
 from django.contrib.postgres.fields import JSONField, ArrayField
+
+class User(AbstractUser):
+	roles_choices = (
+		('Master', 'Master'),
+		('Player', 'Player')
+	)
+	role = models.CharField(
+		choices=roles_choices,
+		max_length=6
+	)
 
 class Effect(models.Model):
 	name = models.CharField(max_length=20)
