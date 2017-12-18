@@ -1,16 +1,6 @@
 from django.db import models
-from django.contrib.auth.models import AbstractUser
 from django.contrib.postgres.fields import JSONField, ArrayField
-
-class User(AbstractUser):
-	roles_choices = (
-		('Master', 'Master'),
-		('Player', 'Player')
-	)
-	role = models.CharField(
-		choices=roles_choices,
-		max_length=6
-	)
+from django.contrib.auth.models import AbstractBaseUser
 
 class Effect(models.Model):
 	name = models.CharField(max_length=20)
@@ -122,3 +112,97 @@ class Class(models.Model):
 
 	class Meta:
 		verbose_name_plural = "Classes"
+
+class Object(models.Model):
+	name = models.CharField(max_length=25)
+	description = models.CharField(max_length=140)
+
+	def __str__(self):
+		return self.name
+
+	class Meta:
+		verbose_name_plural = "Objects"
+
+class Char(models.Model):
+	name = models.CharField(max_length=25)
+	breed = models.OneToOneField(
+		Breed,
+		on_delete=models.CASCADE
+	)
+	klass = models.OneToOneField(
+		Class,
+		on_delete=models.CASCADE
+	)
+	age = models.IntegerField()
+	sex = models.CharField(max_length=12)
+	clothes = models.ManyToManyField(Clothes)
+	weapons = models.ManyToManyField(Weapon)
+	bag = models.ManyToManyField(Object)
+	story = models.CharField(max_length=200)
+
+	def __str__(self):
+		return self.name
+
+class PlayerUser(AbstractBaseUser):
+	char = models.OneToOneField(
+		Char,
+		on_delete=models.CASCADE
+	)
+	username = models.CharField(max_length=25, unique=True)
+	playername = models.CharField(max_length=25, unique=True)
+	active = models.BooleanField(default=True)
+	staff = models.BooleanField(default=False)
+	admin = models.BooleanField(default=False)
+
+	USERNAME_FIELD = 'username'
+	REQUIRED_FIELDS = ['playername']
+
+	def __str__(self):
+		return self.username
+
+	def get_full_name(self):
+		pass
+
+	def get_short_name(self):
+		pass
+	
+	@property
+	def is_staff(self):
+		return self.staff
+
+	@property
+	def is_admin(self):
+		return self.admin
+
+	@property
+	def is_active(self):
+		return self.active
+
+class MasterUser(AbstractBaseUser):
+    username = models.EmailField(max_length=25, unique=True)
+    active = models.BooleanField(default=True)
+    staff = models.BooleanField(default=False)
+    admin = models.BooleanField(default=False)
+
+    USERNAME_FIELD = 'username'
+
+    def __str__(self):
+        return self.username
+
+    def get_full_name(self):
+        pass
+
+    def get_short_name(self):
+        pass
+
+    @property
+    def is_staff(self):
+        return self.staff
+
+    @property
+    def is_admin(self):
+        return self.admin
+
+    @property
+    def is_active(self):
+        return self.active
