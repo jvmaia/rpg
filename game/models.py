@@ -144,7 +144,7 @@ class Char(models.Model):
 		return self.name
 
 class PlayerUser(AbstractBaseUser):
-    username = models.EmailField(max_length=25, unique=True)
+    username = models.CharField(max_length=25, unique=True)
     active = models.BooleanField(default=True)
     staff = models.BooleanField(default=False)
     admin = models.BooleanField(default=False)
