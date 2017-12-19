@@ -13,9 +13,15 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from django.contrib import admin
 from django.urls import path
+from django.contrib import admin
+from django.contrib.auth import views as auth_views
+
+from game.views import dashboard
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('dash/', dashboard),
+    path('dash/login/', auth_views.login, {'template_name': 'core/login.html'}, name='login'),
+    path('dash/logout/', auth_views.logout, {'template_name': 'core/logged_out.html'}, name='logout')
 ]
