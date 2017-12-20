@@ -162,6 +162,10 @@ class PlayerUser(AbstractBaseUser):
         pass
 
     @property
+    def is_admin(self):
+    	return self.admin
+
+    @property
     def is_staff(self):
         return self.staff
 
