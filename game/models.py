@@ -151,8 +151,7 @@ class PlayerManager(BaseUserManager):
 			raise ValueError('Users must have a password')
 		if not master:
 			raise ValueError('Master need be defined')
-		user_obj = self.model(
-			username = username)
+		user_obj = self.model(username=username)
 		user_obj.set_password(password)
 		user_obj.master = master
 		user_obj.staff = is_staff
@@ -163,7 +162,7 @@ class PlayerManager(BaseUserManager):
 
 	def create_staffuser(self, username, master=True, password=None):
 		user = self.create_user(
-			username,
+			username=username,
 			password=password,
 			master=master,
 			is_staff=True
@@ -172,7 +171,7 @@ class PlayerManager(BaseUserManager):
 
 	def create_superuser(self, username, master=True, password=None):
 		user = self.create_user(
-			username,
+			username=username,
 			password=password,
 			master=master,
 			is_staff=True,
@@ -188,6 +187,8 @@ class PlayerUser(AbstractBaseUser):
     admin = models.BooleanField(default=False)
 
     USERNAME_FIELD = 'username'
+
+    REQUIRED_FIELDS = []
 
     objects = PlayerManager()
 
@@ -205,10 +206,6 @@ class PlayerUser(AbstractBaseUser):
 
     def has_module_perms(self, app_label):
     	return True
-
-    @property
-    def is_master(self):
-    	return self.master
 
     @property
     def is_staff(self):
