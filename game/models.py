@@ -133,11 +133,11 @@ class Char(models.Model):
 		on_delete=models.CASCADE
 	)
 	age = models.IntegerField()
+	level = models.IntegerField(default=0)
 	sex = models.CharField(max_length=12)
 	clothes = models.ManyToManyField(Clothes)
 	weapons = models.ManyToManyField(Weapon)
 	bag = models.ManyToManyField(Object)
-	story = models.CharField(max_length=200)
 
 	def __str__(self):
 		return self.name
