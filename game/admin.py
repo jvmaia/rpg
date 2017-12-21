@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import (Effect, Skill, 
+from .models import (Effect, Skill,
     Breed, Clothes_family, Clothes,
     Weapons_family, Weapon, Class, Char)
 
@@ -16,5 +16,6 @@ admin.site.register(Class)
 class CharAdmin(admin.ModelAdmin):
     fields = ['name', 'age',
     'sex', 'breed', 'klass']
+    list_display = ['name', 'breed', 'klass', 'level']
 
 admin.site.register(Char, CharAdmin)

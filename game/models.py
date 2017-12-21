@@ -3,7 +3,7 @@ from django.contrib.postgres.fields import JSONField, ArrayField
 
 class Effect(models.Model):
 	name = models.CharField(max_length=20)
-	consequences = JSONField()
+	consequences = JSONField(default={None:None})
 	description = models.CharField(max_length=100)
 
 	def __str__(self):
@@ -56,7 +56,7 @@ class Clothes(models.Model):
 	)
 	description = models.CharField(max_length=100)
 	weight = models.IntegerField()
-	extras = JSONField()
+	extras = JSONField(default={None:None})
 
 	def __str__(self):
 		return self.name
@@ -91,7 +91,7 @@ class Weapon(models.Model):
 		max_length=1
 	)
 	damage = models.IntegerField(default=0)
-	extras = JSONField()
+	extras = JSONField(default={None:None})
 
 	def __str__(self):
 		return self.name
@@ -133,7 +133,7 @@ class Char(models.Model):
 		on_delete=models.CASCADE
 	)
 	age = models.IntegerField()
-	level = models.IntegerField(default=0)
+	level = models.IntegerField(default=1)
 	sex = models.CharField(max_length=12)
 	clothes = models.ManyToManyField(Clothes)
 	weapons = models.ManyToManyField(Weapon)
