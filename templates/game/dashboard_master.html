@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html>
+<body>
+{% block content %}
+    {% if user.is_authenticated %}
+        <h1> you're logged in dashboard for masters</h1>
+        <a href="/game/logout"> logout </a>
+    {% endif %}
+{% endblock %}
+</body>
+</html>

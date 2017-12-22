@@ -6,8 +6,11 @@ from django.contrib.auth.decorators import login_required
 
 @login_required(login_url='login/')
 def dashboard_master(request):
-	return HttpResponse('<a href="/game/logout">Logout</a>')
+	return render(request, "game/dashboard_master.html")
 
 @login_required(login_url='login/')
 def dashboard_player(request):
-    return HttpResponse('<a href="/game/logout">Logout</a>')
+    return render(request, "game/dashboard_player.html")
+
+def main_page(request):
+    return render(request, "game/main_page.html")

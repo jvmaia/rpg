@@ -15,8 +15,10 @@ Including another URLconf
 """
 from django.urls import include, path
 from django.contrib import admin
+from game.views import main_page
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('game/', include('game.urls'))
+    path('', main_page),
+    path('game/', include('game.urls')),
+    path('admin/', admin.site.urls)
 ]
