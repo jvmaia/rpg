@@ -12,9 +12,10 @@ def dashboard_master(request):
 @login_required(login_url='login/')
 def dashboard_player(request):
 	try:
-		char = Char.objects.get(name=requests.COOKIES['char'])
-		return render(request, 'game/dashboard_player.html')
-	except:
+		print(request.COOKIES['char'])
+		char = Char.objects.get(name=request.COOKIES['char'])
+		return render(request, 'game/dashboard_player.html', {'char': char})
+	except (Char.DoesNotExist, KeyError):
 		all_chars = Char.objects.all()
 		return render(request, 'game/select_char.html', {'chars': all_chars})
 
