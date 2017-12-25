@@ -1,13 +1,16 @@
 {% load static %}
 <!DOCTYPE html>
 <html>
+<head>
+  <script src="{% static 'game/logout.js' %}"></script>
+</head>
 <body>
 {% block content %}
     {% if user.is_authenticated %}
         <h1> you're logged in dashboard as {{ char.name }}</h1>
-        <a onclick="logout()" href="/game/logout"> logout </a>
+        <p> <a onclick="remove_char()" href="/game/player"> select other char </a> </p>
+        <p> <a onclick="remove_char()" href="/game/logout"> logout </a> </p>
     {% endif %}
 {% endblock %}
 </body>
-<script src="{% static 'game/logout.js' %}"></script>
 </html>

@@ -12,7 +12,6 @@ def dashboard_master(request):
 @login_required(login_url='login/')
 def dashboard_player(request):
 	try:
-		print(request.COOKIES['char'])
 		char = Char.objects.get(name=request.COOKIES['char'])
 		return render(request, 'game/dashboard_player.html', {'char': char})
 	except (Char.DoesNotExist, KeyError):
