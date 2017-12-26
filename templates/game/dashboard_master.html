@@ -4,6 +4,9 @@
 {% block content %}
     {% if user.is_authenticated %}
         <h1> you're logged in dashboard for masters</h1>
+        {% for map in maps %}
+          <p> {{ map.image_tag }} </p>
+        {% endfor %}
         <a href="/game/logout"> logout </a>
     {% endif %}
 {% endblock %}

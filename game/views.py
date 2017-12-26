@@ -1,13 +1,14 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from .models import Char
+from .models import Char, Map
 from django.contrib.auth.decorators import login_required
 
 # TODO create custom authentication_form for our custom user model
 
 @login_required(login_url='login/')
 def dashboard_master(request):
-	return render(request, 'game/dashboard_master.html')
+	maps = Map.objects.all()
+	return render(request, 'game/dashboard_master.html', {'maps': maps})
 
 @login_required(login_url='login/')
 def dashboard_player(request):

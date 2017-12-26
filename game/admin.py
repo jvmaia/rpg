@@ -1,11 +1,17 @@
 from django.contrib import admin
 from .models import (Effect, Skill,
     Breed, Clothes_family, Clothes,
-    Weapons_family, Weapon, Class, Char)
+    Weapons_family, Weapon, Class, Char, Map)
 
 admin.site.register(Effect)
 admin.site.register(Weapons_family)
 admin.site.register(Clothes_family)
+
+class MapAdmin(admin.ModelAdmin):
+    list_display = ('name', 'image')
+    fields = ('name', 'image', 'image_tag')
+    readonly_fields = ('image_tag',)
+admin.site.register(Map, MapAdmin)
 
 class SkillAdmin(admin.ModelAdmin):
     list_display = ['name', 'duration']

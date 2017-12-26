@@ -1,5 +1,18 @@
 from django.db import models
+from django.utils.safestring import mark_safe
 from django.contrib.postgres.fields import JSONField, ArrayField
+
+class Map(models.Model):
+	name = models.CharField(max_length=20)
+	image = models.ImageField(upload_to='maps/')
+
+	def image_tag(self):
+		if len(self.image) > 0:
+			return mark_safe('<img src="/media/%s" width="150" height="150" />' % (self.image))
+	image_tag.short_description = 'Map'
+
+	def __str__(self):
+		return self.name
 
 class Effect(models.Model):
 	name = models.CharField(max_length=20)
