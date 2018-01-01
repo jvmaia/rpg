@@ -4,9 +4,16 @@
 {% block content %}
     {% if user.is_authenticated %}
         <h1> you're logged in dashboard for masters</h1>
+        <h2> maps </h2>
         {% for map in maps %}
           <p> {{ map.image_tag }} </p>
         {% endfor %}
+
+        <h2> chars </h2>
+        {% for char in chars %}
+          <p> {{ char.name }} | {{ char.breed }} | {{ char.klass }} | {{ char.level }} </p>
+        {% endfor %}
+
         <a href="/game/logout"> logout </a>
     {% endif %}
 {% endblock %}

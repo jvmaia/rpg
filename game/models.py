@@ -137,11 +137,11 @@ class Object(models.Model):
 
 class Char(models.Model):
 	name = models.CharField(max_length=25)
-	breed = models.OneToOneField(
+	breed = models.ForeignKey(
 		Breed,
 		on_delete=models.CASCADE
 	)
-	klass = models.OneToOneField(
+	klass = models.ForeignKey(
 		Class,
 		on_delete=models.CASCADE
 	)
