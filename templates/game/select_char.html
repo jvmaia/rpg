@@ -13,14 +13,14 @@
       </tr>
     </thead>
     <tbody>
+      {% for char in chars %}
       <tr>
-        {% for char in chars %}
           <td><a onclick="selectChar('{{char.name}}')" href=""> -> </a></td>
           <td> {{ char.name }} </td>
           <td> {{ char.klass.name }} </td>
           <td> {{ char.breed.name }} </td>
-        {% endfor %}
       </tr>
+      {% endfor %}
   </table>
 {% endblock %}
 </body>
