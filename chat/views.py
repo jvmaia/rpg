@@ -1,10 +1,10 @@
 from django.shortcuts import render
-from django.contrib.auth.decorators import login_required
 from .models import Room
 
-
-@login_required
 def index(request):
+    if not request.user.is_authenticated:
+        return render(request, "chat/login_e.html")
+
     rooms = Room.objects.order_by("title")
 
     return render(request, "chat/rooms.html", {
