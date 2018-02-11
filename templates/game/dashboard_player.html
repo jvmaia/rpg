@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <script src="{% static 'game/logout.js' %}"></script>
+  <script src="{% static 'game/js/logout.js' %}"></script>
 </head>
 <body>
 {% block content %}
@@ -13,6 +13,7 @@
       <p> {{ partner.name }} | {{ partner.breed }} | {{ partner.klass }} | {{ partner.level }} </p>
     {% endfor %}
     
+    <p> <a href="/chat"> go chat </a> </p>
     <p> <a onclick="remove_char()" href="/game/player"> select other char </a> </p>
     <p> <a onclick="remove_char()" href="/game/logout"> logout </a> </p>
 {% endblock %}

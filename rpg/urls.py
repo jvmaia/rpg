@@ -22,5 +22,6 @@ from game.views import main_page
 urlpatterns = [
     path('', main_page),
     path('game/', include('game.urls')),
+    path('chat/', include('chat.urls')),
     path('admin/', admin.site.urls)
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+
+{% load staticfiles %}
+
+<html>
+<head>
+    <title>{% block title %}{% endblock %}</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% static "chat/css/style.css" %}" type="text/css" media="screen" />
+    <script src="{% static "chat/js/jquery-1.12.2.min.js" %}" type="text/javascript"></script>
+    <script src="{% static "chat/js/reconnecting-websocket.min.js" %}" type="text/javascript"></script>
+    {% block extra_head %}{% endblock %}
+</head>
+<body>
+    <section>
+        {% block content %}
+        {% endblock %}
+    </section>
+    {% block extra_body %}{% endblock %}
+    {% if user.master %}
+        <p><a href="/game/master"> dashboard </a></p>
+    {% else %}
+        <p><a href="/game/player"> dashboard </a></p>
+    {% endif %}
+</body>
+</html>
