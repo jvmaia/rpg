@@ -1,6 +1,5 @@
-<!DOCTYPE html>
-<html>
-<body>
+{% extends 'game/dashboard_base.html' %}
+
 {% block content %}
     {% if user.is_authenticated %}
         <h1> you're logged in dashboard for masters</h1>
@@ -13,10 +12,5 @@
         {% for char in chars %}
           <p> {{ char.name }} | {{ char.breed }} | {{ char.klass }} | {{ char.level }} </p>
         {% endfor %}
-
-        <p> <a href="/chat"> go chat </a> </p>
-        <a href="/game/logout"> logout </a>
     {% endif %}
 {% endblock %}
-</body>
-</html>

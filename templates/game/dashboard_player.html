@@ -1,21 +1,10 @@
-{% load static %}
-<!DOCTYPE html>
-<html>
-<head>
-  <script src="{% static 'game/js/logout.js' %}"></script>
-</head>
-<body>
+{% extends 'game/dashboard_base.html' %}
+
 {% block content %}
     <h1> you're logged in dashboard as {{ char.name }}</h1>
-
     <h2> partners </h2>
+
     {% for partner in partners %}
       <p> {{ partner.name }} | {{ partner.breed }} | {{ partner.klass }} | {{ partner.level }} </p>
     {% endfor %}
-    
-    <p> <a href="/chat"> go chat </a> </p>
-    <p> <a onclick="remove_char()" href="/game/player"> select other char </a> </p>
-    <p> <a onclick="remove_char()" href="/game/logout"> logout </a> </p>
 {% endblock %}
-</body>
-</html>
