@@ -14,7 +14,7 @@ class MapAdmin(admin.ModelAdmin):
 admin.site.register(Map, MapAdmin)
 
 class SkillAdmin(admin.ModelAdmin):
-    list_display = ['name', 'duration']
+    list_display = ['name', 'duration', 'min_level']
 admin.site.register(Skill, SkillAdmin)
 
 class BreedAdmin(admin.ModelAdmin):

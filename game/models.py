@@ -27,6 +27,7 @@ class Effect(models.Model):
 
 class Skill(models.Model):
 	name = models.CharField(max_length=20)
+	min_level = models.PositiveIntegerField()
 	duration = models.IntegerField()
 	effects = models.ManyToManyField(Effect)
 	description = models.CharField(max_length=100)
