@@ -153,5 +153,12 @@ class Char(models.Model):
 	weapons = models.ManyToManyField(Weapon)
 	bag = models.ManyToManyField(Object)
 
+	def getAvailableSkills(self):
+		skills = []
+		skills += list(self.breed.passive_skill.values())
+		skills += list(self.klass.skills.values())
+
+		return skills
+
 	def __str__(self):
 		return self.name

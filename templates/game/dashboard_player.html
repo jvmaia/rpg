@@ -7,4 +7,23 @@
     {% for partner in partners %}
       <p> {{ partner.name }} | {{ partner.breed }} | {{ partner.klass }} | {{ partner.level }} </p>
     {% endfor %}
+
+    <h4> available skills </h4>
+    <table>
+        <tr>
+            <th>name</th>
+            <th>description</th>
+            <th>duration</th>
+            <th>min_level</th>
+        </tr>
+        {% for skill in skills %}
+            <tr>
+                <td>{{ skill.name  }}</td>
+                <td>{{ skill.description  }}</td>
+                <td>{{ skill.duration  }}</td>
+                <td>{{ skill.min_level  }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+
 {% endblock %}

@@ -13,8 +13,9 @@ def dashboard_master(request):
 def dashboard_player(request):
     try:
         char = Char.objects.get(name=request.COOKIES['char'])
+        skills = char.getAvailableSkills()
         partners = Char.objects.all().exclude(name=request.COOKIES['char'])
-        return render(request, 'game/dashboard_player.html', {'char': char, 'partners': partners})
+        return render(request, 'game/dashboard_player.html', {'char': char, 'skills': skills, 'partners': partners})
     except (Char.DoesNotExist, KeyError):
         chars = Char.objects.all()
         return render(request, 'game/select_char.html', {'chars': chars})
