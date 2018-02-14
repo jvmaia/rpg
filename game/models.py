@@ -154,9 +154,11 @@ class Char(models.Model):
 	bag = models.ManyToManyField(Object)
 
 	def getAvailableSkills(self):
-		skills = []
-		skills += list(self.breed.passive_skill.values())
-		skills += list(self.klass.skills.values())
+		all_skills = []
+		all_skills += list(self.breed.passive_skill.values())
+		all_skills += list(self.klass.skills.values())
+
+		skills = list(filter(lambda x: x['min_level'] <= self.level, all_skills))
 
 		return skills
 
