@@ -9,8 +9,21 @@
         {% endfor %}
 
         <h2> chars </h2>
-        {% for char in chars %}
-          <p> {{ char.name }} | {{ char.breed }} | {{ char.klass }} | {{ char.level }} </p>
-        {% endfor %}
+        <table>
+            <tr>
+                <th>name</th>
+                <th>breed</th>
+                <th>class</th>
+                <th>level</th>
+            </tr>
+            {% for char in chars %}
+                <tr>
+                    <td>{{ char.name  }}</td>
+                    <td>{{ char.breed  }}</td>
+                    <td>{{ char.klass  }}</td>
+                    <td>{{ char.level  }}</td>
+                </tr>
+            {% endfor %}
+        </table>
     {% endif %}
 {% endblock %}
