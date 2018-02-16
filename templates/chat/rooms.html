@@ -48,7 +48,12 @@
                         socket.send(JSON.stringify({
                             "command": "send",
                             "room": data.join,
-                            "message": roomdiv.find("input").val()
+                            "message": roomdiv.find("input").val(),
+                            {% if user.master %}
+                                "char": "master",
+                            {% else %}
+                                "char": Cookies.get("char"),
+                            {% endif %}
                         }));
                         roomdiv.find("input").val("");
                         return false;
@@ -63,7 +68,7 @@
                     switch (data.msg_type) {
                         case 0:
                             ok_msg = "<div class='message'>" +
-                                    "<a class='username'>" + data.username + "</a>" +
+                                    "<a class='username'>" + data.char + "</a>" +
                                     "<a class='body'>" + data.message + "</a>" +
                                     "</div>";
                             break;

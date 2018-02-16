@@ -40,7 +40,7 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
             elif command == "leave":
                 await self.leave_room(content["room"])
             elif command == "send":
-                await self.send_room(content["room"], content["message"])
+                await self.send_room(content["room"], content["message"], content["char"])
         except ClientError as e:
             await self.send_json({"error": e.code})
 
@@ -101,7 +101,7 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
             "leave": str(room.id),
         })
 
-    async def send_room(self, room_id, message):
+    async def send_room(self, room_id, message, char):
         """
         Called by receive_json when someone sends a message to a room.
         """
@@ -113,7 +113,7 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
             {
                 "type": "chat.message",
                 "room_id": room_id,
-                "username": self.scope["user"].username,
+                "char": char,
                 "message": message,
             }
         )
@@ -146,11 +146,12 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
         """
         Called when someone has messaged our chat.
         """
+        print(event)
         await self.send_json(
             {
                 "msg_type": settings.MSG_TYPE_MESSAGE,
                 "room": event["room_id"],
-                "username": event["username"],
-                "message": event["message"],
+                "char": event["char"],
+                "message": event["message"]
             },
         )
