@@ -15,6 +15,7 @@
                 <th>breed</th>
                 <th>class</th>
                 <th>level</th>
+                <th>level up</th>
             </tr>
             {% for char in chars %}
                 <tr>
@@ -22,6 +23,7 @@
                     <td>{{ char.breed  }}</td>
                     <td>{{ char.klass  }}</td>
                     <td>{{ char.level  }}</td>
+                    <td><a href="{% url 'game:char_levelup' char.id %}" target="_blank"><button>level up</button></a></td>
                 </tr>
             {% endfor %}
         </table>

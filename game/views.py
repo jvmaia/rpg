@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404, render
 from django.http import HttpResponse
 from .models import Char, Map
 from django.contrib.auth.decorators import login_required
@@ -22,3 +22,9 @@ def dashboard_player(request):
 
 def main_page(request):
     return render(request, 'game/main_page.html')
+
+def char_levelup(request, char_id):
+    char = get_object_or_404(Char, pk=char_id)
+    char.level += 1
+    char.save()
+    return HttpResponse("Char %s arrived to a new level" % (char_id))
