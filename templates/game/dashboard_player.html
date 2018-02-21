@@ -2,14 +2,9 @@
 
 {% block content %}
     <h1> you're logged in dashboard as {{ char.name }}</h1>
-    <h2> partners </h2>
 
-    {% for partner in partners %}
-      <p> {{ partner.name }} | {{ partner.breed }} | {{ partner.klass }} | {{ partner.level }} </p>
-    {% endfor %}
-
-    <h4> available skills </h4>
     <table>
+        <caption> available skills </caption>
         <tr>
             <th>name</th>
             <th>description</th>
@@ -26,4 +21,39 @@
         {% endfor %}
     </table>
 
+    <br/>
+
+    <table>
+        <caption>items in your bagpack</caption>
+        <tr>
+            <th>name</th>
+            <th>description</th>
+        </tr>
+        {% for item in items %}
+            <tr>
+                <td>{{ item.name }}</td>
+                <td>{{ item.description }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+
+    <br/>
+
+    <table>
+        <caption>partners</caption>
+        <tr>
+            <th>name</th>
+            <th>breed</th>
+            <th>class</th>
+            <th>level</th>
+        </tr>
+        {% for partner in partners %}
+            <tr>
+                <td>{{ partner.name  }}</td>
+                <td>{{ partner.breed  }}</td>
+                <td>{{ partner.klass  }}</td>
+                <td>{{ partner.level  }}</td>
+            </tr>
+        {% endfor %}
+    </table>
 {% endblock %}

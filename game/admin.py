@@ -1,11 +1,13 @@
 from django.contrib import admin
 from .models import (Effect, Skill,
     Breed, Clothes_family, Clothes,
-    Weapons_family, Weapon, Class, Char, Map)
+    Weapons_family, Weapon, Class,
+    Char, Map, Object)
 
 admin.site.register(Effect)
 admin.site.register(Weapons_family)
 admin.site.register(Clothes_family)
+admin.site.register(Object)
 
 class MapAdmin(admin.ModelAdmin):
     list_display = ('name', 'image')
@@ -35,6 +37,6 @@ admin.site.register(Class, ClassAdmin)
 
 class CharAdmin(admin.ModelAdmin):
     fields = ['name', 'age',
-    'sex', 'breed', 'klass']
+    'sex', 'breed', 'klass', 'bag']
     list_display = ['name', 'breed', 'klass', 'level']
 admin.site.register(Char, CharAdmin)
