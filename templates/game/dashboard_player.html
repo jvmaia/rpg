@@ -3,6 +3,13 @@
 {% block content %}
     <h1> you're logged in dashboard as {{ char.name }}</h1>
 
+    <ul>your character
+        <li>{{ char.name }}</li>
+        <li>{{ char.breed }}</li>
+        <li>{{ char.klass }}</li>
+        <li>{{ char.level }}</li>
+    </ul>
+
     <table>
         <caption> available skills </caption>
         <tr>
