@@ -5,6 +5,7 @@
 
     <ul>your character
         <li>{{ char.name }}</li>
+        <li>life: {{ char.actual_life }}/{{ char.life }}</li>
         <li>{{ char.breed }}</li>
         <li>{{ char.klass }}</li>
         <li>{{ char.level }}</li>
@@ -50,6 +51,7 @@
         <caption>partners</caption>
         <tr>
             <th>name</th>
+            <th>life</th>
             <th>breed</th>
             <th>class</th>
             <th>level</th>
@@ -57,6 +59,7 @@
         {% for partner in partners %}
             <tr>
                 <td>{{ partner.name  }}</td>
+                <td>{{ partner.actual_life }}/{{ partner.life }}</td>
                 <td>{{ partner.breed  }}</td>
                 <td>{{ partner.klass  }}</td>
                 <td>{{ partner.level  }}</td>

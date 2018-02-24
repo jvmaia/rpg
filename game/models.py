@@ -146,6 +146,8 @@ class Char(models.Model):
 		Class,
 		on_delete=models.CASCADE
 	)
+	life = models.PositiveIntegerField()
+	actual_life = models.PositiveIntegerField()
 	age = models.IntegerField()
 	level = models.IntegerField(default=1)
 	sex = models.CharField(max_length=12)

@@ -36,7 +36,10 @@ class ClassAdmin(admin.ModelAdmin):
 admin.site.register(Class, ClassAdmin)
 
 class CharAdmin(admin.ModelAdmin):
-    fields = ['name', 'age',
-    'sex', 'breed', 'klass', 'bag']
+    fieldsets = [
+        ('Character', {'fields': ['name', 'life', 'actual_life', 'age',
+            'sex', 'breed', 'klass']}),
+        ('Equipments', {'fields': ['bag']})
+    ]
     list_display = ['name', 'breed', 'klass', 'level']
 admin.site.register(Char, CharAdmin)
