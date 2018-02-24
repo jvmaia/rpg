@@ -66,4 +66,11 @@
             </tr>
         {% endfor %}
     </table>
+
+    <br/>
+
+    <h2> maps </h2>
+    {% for map in maps %}
+        <p> {{ map.image_tag }} </p>
+    {% endfor %}
 {% endblock %}

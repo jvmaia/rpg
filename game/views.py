@@ -7,16 +7,26 @@ from django.contrib.auth.decorators import login_required
 def dashboard_master(request):
     maps = Map.objects.all()
     chars = Char.objects.all()
-    return render(request, 'game/dashboard_master.html', {'maps': maps, 'chars': chars})
+    return render(request, 'game/dashboard_master.html', {
+        'maps': maps,
+        'chars': chars
+    })
 
 @login_required(login_url='login/')
 def dashboard_player(request):
     try:
+        maps = Map.objects.all()
         char = Char.objects.get(name=request.COOKIES['char'])
         items = list(char.bag.values())
         skills = char.getAvailableSkills()
         partners = Char.objects.all().exclude(name=request.COOKIES['char'])
-        return render(request, 'game/dashboard_player.html', {'char': char, 'skills': skills, 'partners': partners, 'items':items})
+        return render(request,'game/dashboard_player.html', {
+            'char': char,
+            'skills': skills,
+            'partners': partners,
+            'items': items,
+            'maps': maps
+        })
     except (Char.DoesNotExist, KeyError):
         chars = Char.objects.all()
         return render(request, 'game/select_char.html', {'chars': chars})
