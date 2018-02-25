@@ -19,11 +19,11 @@ def dashboard_player(request):
         char = Char.objects.get(name=request.COOKIES['char'])
         items = list(char.bag.values())
         skills = char.getAvailableSkills()
-        partners = Char.objects.all().exclude(name=request.COOKIES['char'])
+        characters = Char.objects.all()
         return render(request,'game/dashboard_player.html', {
             'char': char,
             'skills': skills,
-            'partners': partners,
+            'characters': characters,
             'items': items,
             'maps': maps
         })

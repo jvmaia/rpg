@@ -3,74 +3,98 @@
 {% block content %}
     <h1> you're logged in dashboard as {{ char.name }}</h1>
 
-    <ul>your character
-        <li>{{ char.name }}</li>
-        <li>life: {{ char.actual_life }}/{{ char.life }}</li>
-        <li>{{ char.breed }}</li>
-        <li>{{ char.klass }}</li>
-        <li>{{ char.level }}</li>
-    </ul>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <h3>characters</h3>
+                    <table class="table table-hover table-dark">
+                        <thead>
+                            <tr>
+                                <th>name</th>
+                                <th>life</th>
+                                <th>breed</th>
+                                <th>class</th>
+                                <th>level</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for character in characters %}
+                                <tr>
+                                    <td>{{ character.name  }}</td>
+                                    <td>{{ character.actual_life }}/{{ character.life }}</td>
+                                    <td>{{ character.breed  }}</td>
+                                    <td>{{ character.klass  }}</td>
+                                    <td>{{ character.level  }}</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+            </div>
+            <div class="col">
+                <h3> available skills </h3>
+                <table class="table table-hover table-dark">
+                <thead>
+                    <tr>
+                        <th>name</th>
+                        <th>description</th>
+                        <th>duration</th>
+                        <th>min_level</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for skill in skills %}
+                        <tr>
+                            <td>{{ skill.name  }}</td>
+                            <td>{{ skill.description  }}</td>
+                            <td>{{ skill.duration  }}</td>
+                            <td>{{ skill.min_level  }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+                </table>
+            </div>
+        </div>
 
-    <table>
-        <caption> available skills </caption>
-        <tr>
-            <th>name</th>
-            <th>description</th>
-            <th>duration</th>
-            <th>min_level</th>
-        </tr>
-        {% for skill in skills %}
-            <tr>
-                <td>{{ skill.name  }}</td>
-                <td>{{ skill.description  }}</td>
-                <td>{{ skill.duration  }}</td>
-                <td>{{ skill.min_level  }}</td>
-            </tr>
-        {% endfor %}
-    </table>
+        <div class="row">
+            <div class="col">
+                <h3>items in your bagpack</h3>
+                <table class="table table-hover table-dark">
+                <thead>
+                    <tr>
+                        <th>name</th>
+                        <th>description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in items %}
+                        <tr>
+                            <td>{{ item.name }}</td>
+                            <td>{{ item.description }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+                </table>
+            </div>
+            <div class="col">
+                <h3>maps</h3>
+                <table class="table table-hover table-dark">
+                    <thead>
+                        <tr>
+                            <th>name</th>
+                            <th>link</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for map in maps %}
+                            <tr>
+                                <td>{{ map.name }}</td>
+                                <td><a href="{{ map.link}}" target="_blank">link</a></td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 
-    <br/>
-
-    <table>
-        <caption>items in your bagpack</caption>
-        <tr>
-            <th>name</th>
-            <th>description</th>
-        </tr>
-        {% for item in items %}
-            <tr>
-                <td>{{ item.name }}</td>
-                <td>{{ item.description }}</td>
-            </tr>
-        {% endfor %}
-    </table>
-
-    <br/>
-
-    <table>
-        <caption>partners</caption>
-        <tr>
-            <th>name</th>
-            <th>life</th>
-            <th>breed</th>
-            <th>class</th>
-            <th>level</th>
-        </tr>
-        {% for partner in partners %}
-            <tr>
-                <td>{{ partner.name  }}</td>
-                <td>{{ partner.actual_life }}/{{ partner.life }}</td>
-                <td>{{ partner.breed  }}</td>
-                <td>{{ partner.klass  }}</td>
-                <td>{{ partner.level  }}</td>
-            </tr>
-        {% endfor %}
-    </table>
-
-    <br/>
-
-    <h2> maps </h2>
-    {% for map in maps %}
-        <p> {{ map.image_tag }} </p>
-    {% endfor %}
 {% endblock %}

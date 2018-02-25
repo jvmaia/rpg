@@ -11,6 +11,9 @@ class Map(models.Model):
 			return mark_safe('<img src="/media/%s" width="150" height="150" />' % (self.image))
 	image_tag.short_description = 'Map'
 
+	def link(self):
+		return mark_safe('/media/%s' % (self.image))
+
 	def __str__(self):
 		return self.name
 

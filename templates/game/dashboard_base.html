@@ -5,16 +5,17 @@
   {% if not user.master %}
     <script src="{% static 'game/js/logout.js' %}"></script>
   {% endif %}
+  <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet">
 </head>
 <body>
   {% block content %}
   {% endblock %}
-  <p><a href="/chat"> go chat </a></p>
+  <p class="text-center"><a href="/chat"> go chat </a></p>
   {% if user.master %}
-    <a href="/game/logout"> logout </a>
+    <p class="text-center"><a href="/game/logout"> logout </a></p>
   {% else %}
-    <p><a onclick="remove_char()" href="/game/player"> select other char </a></p>
-    <p><a onclick="remove_char()" href="/game/logout"> logout </a></p>
+    <p class="text-center"><a onclick="remove_char()" href="/game/player"> select other char </a></p>
+    <p class="text-center"><a onclick="remove_char()" href="/game/logout"> logout </a></p>
   {% endif %}
 </body>
 </html>
