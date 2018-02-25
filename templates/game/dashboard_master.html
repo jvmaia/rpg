@@ -2,32 +2,56 @@
 
 {% block content %}
     {% if user.is_authenticated %}
-        <h1> you're logged in dashboard for masters</h1>
-        <h2> maps </h2>
-        {% for map in maps %}
-          <p> {{ map.image_tag }} </p>
-        {% endfor %}
+        <h1 class="text-center"> you're logged in dashboard for masters</h1>
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <h3>maps</h3>
+                    <table class="table table-hover table-dark">
+                        <thead>
+                            <tr>
+                                <th>name</th>
+                                <th>link</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for map in maps %}
+                                <tr>
+                                    <td>{{ map.name }}</td>
+                                    <td><a href="{{ map.link}}" target="_blank"><button class="btn btn-outline-light">link</button></a></td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
 
-        <h2> chars </h2>
-        <table>
-            <tr>
-                <th>name</th>
-                <th>breed</th>
-                <th>class</th>
-                <th>level</th>
-                <th>level up</th>
-            </tr>
-            {% for char in chars %}
-                <tr>
-                    <td>{{ char.name  }}</td>
-                    <td>{{ char.breed  }}</td>
-                    <td>{{ char.klass  }}</td>
-                    <td>{{ char.level  }}</td>
-                    <td><button onclick="levelup_char({{ char.id }})">level up</button></td>
-                </tr>
-            {% endfor %}
-        </table>
+                <div class="col">
+                    <h3>Characters</h3>
+                    <table class="table table-hover table-dark">
+                        <tr>
+                            <th>name</th>
+                            <th>breed</th>
+                            <th>class</th>
+                            <th>level</th>
+                            <th>level up</th>
+                        </tr>
+                        {% for char in chars %}
+                            <tr>
+                                <td>{{ char.name  }}</td>
+                                <td>{{ char.breed  }}</td>
+                                <td>{{ char.klass  }}</td>
+                                <td>{{ char.level  }}</td>
+                                <td><button onclick="levelup_char({{ char.id }})" class="btn btn-outline-light">level up</button></td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+            </div>
+        </div>
     {% endif %}
+{% endblock %}
+
+{% block after_body %}
     <script>
         function levelup_char(char_id) {
             axios.get("/game/"+char_id+"/levelup")
