@@ -16,7 +16,7 @@ class MasterAuthenticationForm(AuthenticationForm):
 class PlayerAuthenticationForm(AuthenticationForm):
     def confirm_login_allowed(self, user):
         if user.master:
-            raise forms.ValidationError('please login in master/', code='invalid_login')
+            raise forms.ValidationError('please login at master/', code='invalid_login')
 
     class Meta(AuthenticationForm):
         model = User
