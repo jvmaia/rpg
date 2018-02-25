@@ -30,6 +30,7 @@
                     <table class="table table-hover table-dark">
                         <tr>
                             <th>name</th>
+                            <th>life</th>
                             <th>breed</th>
                             <th>class</th>
                             <th>level</th>
@@ -38,6 +39,7 @@
                         {% for char in chars %}
                             <tr>
                                 <td>{{ char.name  }}</td>
+                                <td>{{ char.actual_life }}/{{ char.life }}</td>
                                 <td>{{ char.breed  }}</td>
                                 <td>{{ char.klass  }}</td>
                                 <td>{{ char.level  }}</td>
