@@ -1,28 +1,31 @@
+{% extends 'base.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html>
-<body>
 {% block content %}
-  <table>
-      <caption>Chars</caption>
-      <tr>
-        <th> Select </th>
-        <th> Name </th>
-        <th> Class </th>
-        <th> Breed </th>
-        <th> Level </th>
-      </tr>
+<body>
+<h3 class="text-center">Chars</h3>
+  <table class="table table-hover table-dark">
+      <thead>
+        <tr>
+          <th> Select </th>
+          <th> Name </th>
+          <th> Class </th>
+          <th> Breed </th>
+          <th> Level </th>
+        </tr>
+      </thead>
+      <tbody>
       {% for char in chars %}
-      <tr>
-          <td><a onclick="selectChar('{{char.name}}')" href=""> -> </a></td>
-          <td> {{ char.name }} </td>
-          <td> {{ char.klass }} </td>
-          <td> {{ char.breed }} </td>
-          <td> {{ char.level }} </td>
-      </tr>
+        <tr>
+            <td><a onclick="selectChar('{{char.name}}')" href=""><button type="button" class="btn btn-outline-light">this</button></a></td>
+            <td> {{ char.name }} </td>
+            <td> {{ char.klass }} </td>
+            <td> {{ char.breed }} </td>
+            <td> {{ char.level }} </td>
+        </tr>
       {% endfor %}
+      </tbody>
   </table>
-{% endblock %}
+  <p class="text-center"><a onclick="remove_char()" href="/game/logout"> logout </a></p>
 </body>
 <script src="{% static 'game/js/select_char.js' %}"></script>
-</html>
+{% endblock %}

@@ -23,9 +23,18 @@
                     <td>{{ char.breed  }}</td>
                     <td>{{ char.klass  }}</td>
                     <td>{{ char.level  }}</td>
-                    <td><a href="{% url 'game:char_levelup' char.id %}" target="_blank"><button>level up</button></a></td>
+                    <td><button onclick="levelup_char({{ char.id }})">level up</button></td>
                 </tr>
             {% endfor %}
         </table>
     {% endif %}
+    <script>
+        function levelup_char(char_id) {
+            axios.get("/game/"+char_id+"/levelup")
+                .then(function(response){
+                    alert(response.data);
+                    location.reload();
+                })
+        }
+    </script>
 {% endblock %}
