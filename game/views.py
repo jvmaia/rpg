@@ -39,3 +39,12 @@ def char_levelup(request, char_id):
     char.level += 1
     char.save()
     return HttpResponse("Char %s arrived to a new level" % (char_id), content_type="text/plain")
+
+def char_applyDamage(request, char_id, damage):
+    char = get_object_or_404(Char, pk=char_id)
+    if char.actual_life < damage:
+        char.actual_life = 0
+    else:
+        char.actual_life -= damage
+    char.save()
+    return HttpResponse("%i" % (char.actual_life), content_type="text/plain")
