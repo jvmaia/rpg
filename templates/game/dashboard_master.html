@@ -49,18 +49,50 @@
                     </table>
                 </div>
             </div>
+            <div id="effects">
+                <h5>Apply damage:</h5>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="basic-addon1">Char name and damage</span>
+                    </div>
+                    <input type="text" class="form-control" id="char_name" placeholder="Char name">
+                    <input type="number" class="form-control" id="damage" placeholder="50">
+                </div>
+                <button onclick="applyDamage()" class="btn btn-outline-dark">Apply</button>
+            </div>
         </div>
     {% endif %}
 {% endblock %}
 
 {% block after_body %}
     <script>
+        function slugify(text) {
+          return text.toString().toLowerCase()
+            .replace(/\s+/g, '-')           // Replace spaces with -
+            .replace(/[^\w\-]+/g, '')       // Remove all non-word chars
+            .replace(/\-\-+/g, '-')         // Replace multiple - with single -
+            .replace(/^-+/, '')             // Trim - from start of text
+            .replace(/-+$/, '');            // Trim - from end of text
+        };
+
         function levelup_char(char_id) {
-            axios.get("/game/"+char_id+"/levelup")
-                .then(function(response){
+            axios.get('/game/'+char_id+'/levelup')
+                .then(function(response) {
                     alert(response.data);
                     location.reload();
                 })
-        }
+        };
+
+        function applyDamage() {
+            damage = document.getElementById('damage').value;
+            char_name = document.getElementById('char_name').value;
+            console.log(char_name, damage);
+            char_name = slugify(char_name);
+            axios.get('/game/'+char_name+'/'+damage+'/applydamage')
+                .then(function(response) {
+                    alert(response.data);
+                    location.reload();
+                })
+        };
     </script>
 {% endblock %}

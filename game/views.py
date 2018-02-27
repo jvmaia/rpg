@@ -40,11 +40,15 @@ def char_levelup(request, char_id):
     char.save()
     return HttpResponse("Char %s arrived to a new level" % (char_id), content_type="text/plain")
 
-def char_applyDamage(request, char_id, damage):
-    char = get_object_or_404(Char, pk=char_id)
+def char_applyDamage(request, char_name, damage):
+    try:
+        char = Char.objects.get(slug=char_name)
+    except:
+        return HttpResponseNotFound('<h1>Char not found</h1>')
+
     if char.actual_life < damage:
         char.actual_life = 0
     else:
         char.actual_life -= damage
     char.save()
-    return HttpResponse("%i" % (char.actual_life), content_type="text/plain")
+    return HttpResponse("Char %s new life: %i" % (char.name, char.actual_life), content_type="text/plain")

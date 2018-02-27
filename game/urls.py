@@ -19,5 +19,5 @@ urlpatterns = [
 
     path('logout/', auth_views.logout, {'template_name': 'game/logged_out.html'}, name='logout'),
     path('<int:char_id>/levelup', char_levelup, name='char_levelup'),
-    path('<int:char_id>/<int:damage>/applydamage', char_applyDamage, name='char_applyDamage')
+    path('<slug:char_name>/<int:damage>/applydamage', char_applyDamage, name='char_applyDamage')
 ]

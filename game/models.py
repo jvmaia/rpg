@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils.safestring import mark_safe
 from django.contrib.postgres.fields import JSONField, ArrayField
+from django.template.defaultfilters import slugify
 
 class Map(models.Model):
 	name = models.CharField(max_length=20)
@@ -157,6 +158,7 @@ class Char(models.Model):
 	clothes = models.ManyToManyField(Clothes)
 	weapons = models.ManyToManyField(Weapon)
 	bag = models.ManyToManyField(Object)
+	slug = models.SlugField()
 
 	def getAvailableSkills(self):
 		all_skills = []
@@ -169,3 +171,7 @@ class Char(models.Model):
 
 	def __str__(self):
 		return self.name
+
+	def save(self, *args, **kwargs):
+		self.slug = slugify(self.name)
+		super(Char, self).save(*args, **kwargs)
