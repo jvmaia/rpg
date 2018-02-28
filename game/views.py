@@ -1,15 +1,19 @@
 from django.shortcuts import get_object_or_404, render
 from django.http import HttpResponse
-from .models import Char, Map
+from .models import Char, Map, Object, Weapon
 from django.contrib.auth.decorators import login_required
 
 @login_required(login_url='login/')
 def dashboard_master(request):
     maps = Map.objects.all()
     chars = Char.objects.all().order_by('-level')
+    objects = Object.objects.all()
+    weapons = Weapon.objects.all().order_by('-damage')
     return render(request, 'game/dashboard_master.html', {
         'maps': maps,
-        'chars': chars
+        'chars': chars,
+        'objects': objects,
+        'weapons': weapons
     })
 
 @login_required(login_url='login/')

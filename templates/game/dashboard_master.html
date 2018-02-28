@@ -8,25 +8,21 @@
                 <div class="col">
                     <h3>maps</h3>
                     <table class="table table-hover table-dark">
-                        <thead>
+                        <tr>
+                            <th>name</th>
+                            <th>link</th>
+                        </tr>
+                        {% for map in maps %}
                             <tr>
-                                <th>name</th>
-                                <th>link</th>
+                                <td>{{ map.name }}</td>
+                                <td><a href="{{ map.link}}" target="_blank"><button class="btn btn-outline-light">link</button></a></td>
                             </tr>
-                        </thead>
-                        <tbody>
-                            {% for map in maps %}
-                                <tr>
-                                    <td>{{ map.name }}</td>
-                                    <td><a href="{{ map.link}}" target="_blank"><button class="btn btn-outline-light">link</button></a></td>
-                                </tr>
-                            {% endfor %}
-                        </tbody>
+                        {% endfor %}
                     </table>
                 </div>
 
                 <div class="col">
-                    <h3>Characters</h3>
+                    <h3>characters</h3>
                     <table class="table table-hover table-dark">
                         <tr>
                             <th>name</th>
@@ -49,6 +45,45 @@
                     </table>
                 </div>
             </div>
+
+            <div class="row">
+                <div class="col">
+                    <h3>objects</h3>
+                    <table class="table table-hover table-dark">
+                        <tr>
+                            <th>name</th>
+                            <th>description</th>
+                        </tr>
+                        {% for object in objects %}
+                            <tr>
+                                <td>{{ object.name }}</td>
+                                <td>{{ object.description }}</td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+
+                <div class="col">
+                    <h3>weapons</h3>
+                    <table class="table table-hover table-dark">
+                        <tr>
+                            <th>name</th>
+                            <th>hands</th>
+                            <th>damage</th>
+                            <th>family</th>
+                        </tr>
+                        {% for weapon in weapons %}
+                            <tr>
+                                <td>{{ weapon.name }}</td>
+                                <td>{{ weapon.hands }}</td>
+                                <td>{{ weapon.damage }}</td>
+                                <td>{{ weapon.family }}</td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+            </div>
+
             <div id="effects">
                 <h5>Apply damage:</h5>
                 <div class="input-group mb-3">
