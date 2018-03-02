@@ -133,9 +133,14 @@ class Class(models.Model):
 class Object(models.Model):
 	name = models.CharField(max_length=25)
 	description = models.CharField(max_length=140)
+	slug = models.SlugField()
 
 	def __str__(self):
 		return self.name
+
+	def save(self, *args, **kwargs):
+		self.slug = slugify(self.name)
+		super(Object, self).save(*args, **kwargs)
 
 	class Meta:
 		verbose_name_plural = "Objects"
@@ -169,9 +174,9 @@ class Char(models.Model):
 
 		return skills
 
-	def __str__(self):
-		return self.name
-
 	def save(self, *args, **kwargs):
 		self.slug = slugify(self.name)
 		super(Char, self).save(*args, **kwargs)
+
+	def __str__(self):
+		return self.name
