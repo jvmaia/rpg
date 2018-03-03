@@ -99,7 +99,7 @@ class Weapon(models.Model):
 	)
 	name = models.CharField(max_length=20)
 	family = models.ForeignKey(
-		'Weapons_family',
+		Weapons_family,
 		on_delete=models.SET_NULL,
 		blank=True,
 		null=True

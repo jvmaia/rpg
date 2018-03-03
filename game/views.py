@@ -38,6 +38,20 @@ def dashboard_player(request):
 def main_page(request):
     return render(request, 'game/main_page.html')
 
+def char_backpack(request, char_name):
+    try:
+        char = Char.objects.get(slug=char_name)
+    except:
+        return HttpResponse('Char not found')    
+
+    weapons = list(char.weapons.values())
+    for weapon in weapons:
+        family_name = Weapon.objects.get(id=weapon['family_id']).name
+        weapon['family_name'] = family_name
+    items = list(char.bag.values())
+
+    return render(request, 'game/char_backpack.html', {'char': char, 'items': items, 'weapons':weapons})
+
 def char_levelup(request, char_id):
     char = get_object_or_404(Char, pk=char_id)
     char.level += 1
