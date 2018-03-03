@@ -110,9 +110,14 @@ class Weapon(models.Model):
 	)
 	damage = models.IntegerField(default=0)
 	extras = JSONField(default={None:None})
+	slug = models.SlugField()
 
 	def __str__(self):
 		return self.name
+
+	def save(self, *args, **kwargs):
+		self.slug = slugify(self.name)
+		super(Weapon, self).save(*args, **kwargs)
 
 	class Meta:
 		verbose_name_plural = "Weapons"

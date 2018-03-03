@@ -1,5 +1,5 @@
 from django.shortcuts import get_object_or_404, render
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseNotFound
 from .models import Char, Map, Object, Weapon
 from django.contrib.auth.decorators import login_required
 
@@ -48,7 +48,7 @@ def char_applyDamage(request, char_name, damage):
     try:
         char = Char.objects.get(slug=char_name)
     except:
-        return HttpResponseNotFound('<h1>Char not found</h1>')
+        return HttpResponse('Char not found')
 
     if char.actual_life < damage:
         char.actual_life = 0
@@ -56,3 +56,24 @@ def char_applyDamage(request, char_name, damage):
         char.actual_life -= damage
     char.save()
     return HttpResponse("Char %s new life: %i" % (char.name, char.actual_life), content_type="text/plain")
+
+def char_giveItem(request, char_name, item_name):
+    try:
+        char = Char.objects.get(slug=char_name)
+    except:
+        return HttpResponse('Char not found')
+
+    try:
+        item = Object.objects.get(slug=item_name)
+    except:
+        try:
+            item = Weapon.objects.get(slug=item_name)
+        except:
+            return HttpResponse('Item not found')
+
+    if isinstance(item, Object):
+        char.bag.add(item)
+    else:
+        char.weapons.add(item)
+
+    return HttpResponse('Char received a new item')

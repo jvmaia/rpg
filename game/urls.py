@@ -3,7 +3,8 @@ from django.contrib.auth import views as auth_views
 from .forms import MasterAuthenticationForm, PlayerAuthenticationForm
 from .views import (
     dashboard_master, dashboard_player,
-    char_levelup, char_applyDamage
+    char_levelup, char_applyDamage,
+    char_giveItem
     )
 
 app_name = 'game'
@@ -19,5 +20,6 @@ urlpatterns = [
 
     path('logout/', auth_views.logout, {'template_name': 'game/logged_out.html'}, name='logout'),
     path('<int:char_id>/levelup', char_levelup, name='char_levelup'),
-    path('<slug:char_name>/<int:damage>/applydamage', char_applyDamage, name='char_applyDamage')
+    path('<slug:char_name>/<int:damage>/applydamage', char_applyDamage, name='char_applyDamage'),
+    path('<slug:char_name>/<slug:item_name>/giveitem', char_giveItem, name='char_giveItem')
 ]

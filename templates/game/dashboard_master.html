@@ -85,7 +85,7 @@
             </div>
 
             <div id="effects">
-                <h5>Apply damage:</h5>
+                <p><h4>Apply damage:</h4></p>
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="basic-addon1">Char name and damage</span>
@@ -94,6 +94,16 @@
                     <input type="number" class="form-control" id="damage" placeholder="50">
                 </div>
                 <button onclick="applyDamage()" class="btn btn-outline-dark">Apply</button>
+
+                <p><h4>Give item:</h4></p>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="basic-addon1">Char name and item name</span>
+                    </div>
+                    <input type="text" class="form-control" id="char_name01" placeholder="Char name">
+                    <input type="text" class="form-control" id="item_name" placeholder="Item name">
+                </div>
+                <button onclick="giveItem()" class="btn btn-outline-dark">Give</button>
             </div>
         </div>
     {% endif %}
@@ -121,13 +131,30 @@
         function applyDamage() {
             damage = document.getElementById('damage').value;
             char_name = document.getElementById('char_name').value;
-            console.log(char_name, damage);
             char_name = slugify(char_name);
             axios.get('/game/'+char_name+'/'+damage+'/applydamage')
                 .then(function(response) {
                     alert(response.data);
                     location.reload();
                 })
+                .catch(function (error) {
+                    console.log(error);
+                });
         };
+
+        function giveItem() {
+            item = document.getElementById('item_name').value;
+            char = document.getElementById('char_name01').value;
+            item_name = slugify(item);
+            char_name = slugify(char);
+            axios.get('/game/'+char_name+'/'+item_name+'/giveitem')
+                .then(function(response) {
+                    alert(response.data);
+                    location.reload();
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+        }
     </script>
 {% endblock %}
