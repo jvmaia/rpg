@@ -12,14 +12,27 @@
 <body>
   {% block content %}
   {% endblock %}
-  <p class="text-center"><a href="/chat"> go chat </a></p>
-  {% if user.master %}
-    <p class="text-center"><a href="/game/logout"> logout </a></p>
-  {% else %}
-    <p class="text-center"><a onclick="remove_char()" href="/game/player"> select other char </a></p>
-    <p class="text-center"><a onclick="remove_char()" href="/game/logout"> logout </a></p>
-  {% endif %}
+  <br/>
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <a class="btn btn-outline-dark" href="/chat">go chat</a>
+      </div>
+      {% if user.master %}
+        <div class="col">
+          <a class="btn btn-outline-dark" href="/game/logout">logout</a>
+        </div>
+      {% else %}
+        <div class="col">
+          <a onclick="remove_char()" class="btn btn-outline-dark" href="/game/player">select other char</a>
+        </div>
+        <div class="col">
+          <a onclick="remove_char()" class="btn btn-outline-dark" href="/game/logout">logout</a>
+        </div>
+      {% endif %}
+    </div>
+  </div>
 </body>
- {% block after_body %}
- {% endblock %}
+{% block after_body %}
+{% endblock %}
 </html>
