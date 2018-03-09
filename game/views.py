@@ -3,6 +3,7 @@ from django.http import HttpResponse, HttpResponseNotFound
 from .models import Char, Map, Object, Weapon
 from django.contrib.auth.decorators import login_required
 
+
 @login_required(login_url='login/')
 def dashboard_master(request):
     maps = Map.objects.all()
@@ -16,6 +17,7 @@ def dashboard_master(request):
         'weapons': weapons
     })
 
+
 @login_required(login_url='login/')
 def dashboard_player(request):
     try:
@@ -24,7 +26,7 @@ def dashboard_player(request):
         items = list(char.bag.values())
         skills = char.getAvailableSkills()
         characters = Char.objects.all()
-        return render(request,'game/dashboard_player.html', {
+        return render(request, 'game/dashboard_player.html', {
             'char': char,
             'skills': skills,
             'characters': characters,
@@ -35,14 +37,16 @@ def dashboard_player(request):
         chars = Char.objects.all()
         return render(request, 'game/select_char.html', {'chars': chars})
 
+
 def main_page(request):
     return render(request, 'game/main_page.html')
+
 
 def char_backpack(request, char_name):
     try:
         char = Char.objects.get(slug=char_name)
     except:
-        return HttpResponse('Char not found')    
+        return HttpResponse('Char not found')
 
     weapons = list(char.weapons.values())
     for weapon in weapons:
@@ -50,13 +54,15 @@ def char_backpack(request, char_name):
         weapon['family_name'] = family_name
     items = list(char.bag.values())
 
-    return render(request, 'game/char_backpack.html', {'char': char, 'items': items, 'weapons':weapons})
+    return render(request, 'game/char_backpack.html', {'char': char, 'items': items, 'weapons': weapons})
+
 
 def char_levelup(request, char_id):
     char = get_object_or_404(Char, pk=char_id)
     char.level += 1
     char.save()
-    return HttpResponse("Char %s arrived to a new level" % (char_id), content_type="text/plain")
+    return HttpResponse("Char %s arrived to a new level" % (char.name), content_type="text/plain")
+
 
 def char_applyDamage(request, char_name, damage):
     try:
@@ -70,6 +76,7 @@ def char_applyDamage(request, char_name, damage):
         char.actual_life -= damage
     char.save()
     return HttpResponse("Char %s new life: %i" % (char.name, char.actual_life), content_type="text/plain")
+
 
 def char_giveItem(request, char_name, item_name):
     try:
