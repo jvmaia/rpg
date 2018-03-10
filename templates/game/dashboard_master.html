@@ -88,15 +88,15 @@
             </div>
 
             <div id="effects">
-                <p><h4>Apply damage:</h4></p>
+                <p><h4>Apply damage or heal:</h4></p>
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
-                        <span class="input-group-text" id="basic-addon1">Char name and damage</span>
+                        <span class="input-group-text" id="basic-addon1">Char name and damage/heal</span>
                     </div>
                     <input type="text" class="form-control" id="char_name" placeholder="Char name">
-                    <input type="number" class="form-control" id="damage" placeholder="50">
+                    <input type="number" class="form-control" id="difference" placeholder="-N to damage; N to heal">
                 </div>
-                <button onclick="applyDamage()" class="btn btn-outline-dark">Apply</button>
+                <button onclick="applyDifference()" class="btn btn-outline-dark">Apply</button>
 
                 <p><h4>Give item:</h4></p>
                 <div class="input-group mb-3">

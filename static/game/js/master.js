@@ -15,11 +15,11 @@ function levelup_char(char_id) {
         })
 };
 
-function applyDamage() {
-    damage = document.getElementById('damage').value;
+function applyDifference() {
+    difference = document.getElementById('difference').value;
     char_name = document.getElementById('char_name').value;
     char_name = slugify(char_name);
-    axios.get('/game/'+char_name+'/'+damage+'/applydamage')
+    axios.get('/game/'+char_name+'/'+difference+'/applydifference')
         .then(function(response) {
             alert(response.data);
             location.reload();

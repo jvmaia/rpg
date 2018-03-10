@@ -64,16 +64,24 @@ def char_levelup(request, char_id):
     return HttpResponse("Char %s arrived to a new level" % (char.name), content_type="text/plain")
 
 
-def char_applyDamage(request, char_name, damage):
+def char_applyDamage(request, char_name, difference):
     try:
         char = Char.objects.get(slug=char_name)
     except:
         return HttpResponse('Char not found')
 
-    if char.actual_life < damage:
+    try:
+        difference = int(difference)
+    except:
+        return HttpResponse('Invalid number')
+
+    if difference > 0 and char.actual_life + difference > char.life:
+        char.actual_life = char.life
+    elif char.actual_life + difference < 0:
         char.actual_life = 0
     else:
-        char.actual_life -= damage
+        char.actual_life += difference
+
     char.save()
     return HttpResponse("Char %s new life: %i" % (char.name, char.actual_life), content_type="text/plain")
 
