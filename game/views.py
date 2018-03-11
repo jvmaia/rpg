@@ -25,11 +25,11 @@ def dashboard_player(request):
         char = Char.objects.get(name=request.COOKIES['char'])
         items = list(char.bag.values())
         skills = char.getAvailableSkills()
-        characters = Char.objects.all()
+        chars = Char.objects.all()
         return render(request, 'game/dashboard_player.html', {
             'char': char,
             'skills': skills,
-            'characters': characters,
+            'chars': chars,
             'items': items,
             'maps': maps
         })
@@ -42,7 +42,7 @@ def main_page(request):
     return render(request, 'game/main_page.html')
 
 
-def char_backpack(request, char_name):
+def char_profile(request, char_name):
     try:
         char = Char.objects.get(slug=char_name)
     except:
@@ -53,8 +53,14 @@ def char_backpack(request, char_name):
         family_name = Weapon.objects.get(id=weapon['family_id']).name
         weapon['family_name'] = family_name
     items = list(char.bag.values())
+    skills = char.getAvailableSkills()
 
-    return render(request, 'game/char_backpack.html', {'char': char, 'items': items, 'weapons': weapons})
+    return render(request, 'game/char_profile.html', {
+        'char': char,
+        'items': items,
+        'weapons': weapons,
+        'skills': skills
+    })
 
 
 def char_levelup(request, char_id):

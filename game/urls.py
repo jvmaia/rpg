@@ -4,7 +4,7 @@ from .forms import MasterAuthenticationForm, PlayerAuthenticationForm
 from .views import (
     dashboard_master, dashboard_player,
     char_levelup, char_applyDamage,
-    char_giveItem, char_backpack
+    char_giveItem, char_profile
 )
 
 app_name = 'game'
@@ -25,5 +25,5 @@ urlpatterns = [
          char_applyDamage, name='char_applyDamage'),
     path('<slug:char_name>/<slug:item_name>/giveitem',
          char_giveItem, name='char_giveItem'),
-    path('<slug:char_name>/backpack', char_backpack, name='char_backpack')
+    path('<slug:char_name>/profile', char_profile, name='char_profile')
 ]
