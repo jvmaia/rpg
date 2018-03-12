@@ -1,6 +1,6 @@
 from django.shortcuts import get_object_or_404, render
 from django.http import HttpResponse, HttpResponseNotFound
-from .models import Char, Map, Object, Weapon
+from .models import Char, Map, Object, Weapon, Weapons_family
 from django.contrib.auth.decorators import login_required
 
 
@@ -9,7 +9,12 @@ def dashboard_master(request):
     maps = Map.objects.all()
     chars = Char.objects.all().order_by('-level')
     objects = Object.objects.all()
-    weapons = Weapon.objects.all().order_by('-damage')
+    weapons = list(Weapon.objects.all().order_by('-damage').values())
+    for weapon in weapons:
+        weapon['family_name'] = Weapons_family.objects.get(
+            id=weapon['family_id']
+        )
+
     return render(request, 'game/dashboard_master.html', {
         'maps': maps,
         'chars': chars,
@@ -21,21 +26,29 @@ def dashboard_master(request):
 @login_required(login_url='login/')
 def dashboard_player(request):
     try:
-        maps = Map.objects.all()
         char = Char.objects.get(name=request.COOKIES['char'])
-        items = list(char.bag.values())
-        skills = char.getAvailableSkills()
-        chars = Char.objects.all()
-        return render(request, 'game/dashboard_player.html', {
-            'char': char,
-            'skills': skills,
-            'chars': chars,
-            'items': items,
-            'maps': maps
-        })
     except (Char.DoesNotExist, KeyError):
         chars = Char.objects.all()
         return render(request, 'game/select_char.html', {'chars': chars})
+
+    maps = Map.objects.all()
+    items = list(char.bag.values())
+    weapons = list(char.weapons.values())
+    for weapon in weapons:
+        weapon['family_name'] = Weapons_family.objects.get(
+            id=weapon['family_id']
+        )
+
+    skills = char.getAvailableSkills()
+    chars = Char.objects.all()
+    return render(request, 'game/dashboard_player.html', {
+        'char': char,
+        'skills': skills,
+        'chars': chars,
+        'items': items,
+        'weapons': weapons,
+        'maps': maps
+    })
 
 
 def main_page(request):
@@ -50,8 +63,10 @@ def char_profile(request, char_name):
 
     weapons = list(char.weapons.values())
     for weapon in weapons:
-        family_name = Weapon.objects.get(id=weapon['family_id']).name
-        weapon['family_name'] = family_name
+        weapon['family_name'] = Weapons_family.objects.get(
+            id=weapon['family_id']
+        )
+
     items = list(char.bag.values())
     skills = char.getAvailableSkills()
 

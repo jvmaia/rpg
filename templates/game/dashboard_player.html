@@ -6,34 +6,33 @@
     <div class="container">
         <div class="row">
             <div class="col">
-                <h3>characters</h3>
-                    <table class="table table-hover table-dark">
-                        <thead>
-                            <tr>
-                                <th>name</th>
-                                <th>life</th>
-                                <th>breed</th>
-                                <th>class</th>
-                                <th>level</th>
-                                <th>open profile</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {% for char in chars %}
-                                <tr>
-                                    <td>{{ char.name  }}</td>
-                                    <td>{{ char.actual_life }}/{{ char.life }}</td>
-                                    <td>{{ char.breed  }}</td>
-                                    <td>{{ char.klass  }}</td>
-                                    <td>{{ char.level  }}</td>
-                                    <td><a href="/game/{{ char.slug }}/profile" target="_blank"><button class="btn btn-outline-light">open
-                                </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>
+                <h3 class="text-center">your char:</h1>
+                <table class="table table-hover table-dark">
+                    <thead>
+                        <tr>
+                            <th>name</th>
+                            <th>life</th>
+                            <th>breed</th>
+                            <th>class</th>
+                            <th>level</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>{{ char.name }}</td>
+                            <td>{{ char.actual_life }}/{{ char.life }}</td>
+                            <td>{{ char.breed }}</td>
+                            <td>{{ char.klass }}</td>
+                            <td>{{ char.level }}</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
+        </div>
+
+        <div class="row">
             <div class="col">
-                <h3> available skills </h3>
+                <h3>available skills</h3>
                 <table class="table table-hover table-dark">
                 <thead>
                     <tr>
@@ -50,6 +49,30 @@
                             <td>{{ skill.description  }}</td>
                             <td>{{ skill.duration  }}</td>
                             <td>{{ skill.min_level  }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+                </table>
+            </div>
+
+            <div class="col">
+                <h3>weapons</h3>
+                <table class="table table-hover table-dark">
+                <thead>
+                    <tr>
+                        <th>name</th>
+                        <th>hands</th>
+                        <th>damage</th>
+                        <th>family</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for weapon in weapons %}
+                        <tr>
+                            <td>{{ weapon.name  }}</td>
+                            <td>{{ weapon.hands  }}</td>
+                            <td>{{ weapon.damage  }}</td>
+                            <td>{{ weapon.family_name  }}</td>
                         </tr>
                     {% endfor %}
                 </tbody>
@@ -77,20 +100,51 @@
                 </tbody>
                 </table>
             </div>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <h3>characters</h3>
+                    <table class="table table-hover table-dark">
+                        <thead>
+                            <tr>
+                                <th>name</th>
+                                <th>life</th>
+                                <th>breed</th>
+                                <th>class</th>
+                                <th>level</th>
+                                <th>profile</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for char in chars %}
+                                <tr>
+                                    <td>{{ char.name  }}</td>
+                                    <td>{{ char.actual_life }}/{{ char.life }}</td>
+                                    <td>{{ char.breed  }}</td>
+                                    <td>{{ char.klass  }}</td>
+                                    <td>{{ char.level  }}</td>
+                                    <td><a href="/game/{{ char.slug }}/profile" target="_blank"><button class="btn btn-outline-light">open</button></a></td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+            </div>
+
             <div class="col">
                 <h3>maps</h3>
                 <table class="table table-hover table-dark">
                     <thead>
                         <tr>
                             <th>name</th>
-                            <th>link</th>
+                            <th>open</th>
                         </tr>
                     </thead>
                     <tbody>
                         {% for map in maps %}
                             <tr>
                                 <td>{{ map.name }}</td>
-                                <td><a href="{{ map.link}}" target="_blank">link</a></td>
+                                <td><a href="{{ map.link}}" target="_blank"><button class="btn btn-outline-light">open</button></a></td>
                             </tr>
                         {% endfor %}
                     </tbody>
