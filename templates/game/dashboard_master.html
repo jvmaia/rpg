@@ -9,26 +9,30 @@
                 <div class="col">
                     <h3>characters</h3>
                     <table class="table table-hover table-dark">
-                        <tr>
-                            <th>name</th>
-                            <th>life</th>
-                            <th>breed</th>
-                            <th>class</th>
-                            <th>level</th>
-                            <th>level up</th>
-                            <th>profile</th>
-                        </tr>
-                        {% for char in chars %}
+                        <thead>
                             <tr>
-                                <td>{{ char.name }}</td>
-                                <td>{{ char.actual_life }}/{{ char.life }}</td>
-                                <td>{{ char.breed }}</td>
-                                <td>{{ char.klass }}</td>
-                                <td>{{ char.level }}</td>
-                                <td><button onclick="levelup_char({{ char.id }})" class="btn btn-outline-light">level up</button></td>
-                                <td><a href="/game/{{ char.slug }}/profile" target="_blank"><button class="btn btn-outline-light">open</button></a></td>
+                                <th>name</th>
+                                <th>life</th>
+                                <th>breed</th>
+                                <th>class</th>
+                                <th>level</th>
+                                <th>level up</th>
+                                <th>profile</th>
                             </tr>
-                        {% endfor %}
+                        </thead>
+                        <tbody>
+                            {% for char in chars %}
+                                <tr>
+                                    <td>{{ char.name }}</td>
+                                    <td>{{ char.actual_life }}/{{ char.life }}</td>
+                                    <td>{{ char.breed }}</td>
+                                    <td>{{ char.klass }}</td>
+                                    <td>{{ char.level }}</td>
+                                    <td><button onclick="levelup_char({{ char.id }})" class="btn btn-outline-light">level up</button></td>
+                                    <td><a href="/game/{{ char.slug }}/profile" target="_blank"><button class="btn btn-outline-light">open</button></a></td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
                     </table>
                 </div>
             </div>
@@ -37,52 +41,64 @@
                 <div class="col">
                     <h3>maps</h3>
                     <table class="table table-hover table-dark">
-                        <tr>
-                            <th>name</th>
-                            <th>link</th>
-                        </tr>
-                        {% for map in maps %}
+                        <thead>
                             <tr>
-                                <td>{{ map.name }}</td>
-                                <td><a href="{{ map.link}}" target="_blank"><button class="btn btn-outline-light">link</button></a></td>
+                                <th>name</th>
+                                <th>link</th>
                             </tr>
-                        {% endfor %}
+                        </thead>
+                        <tbody>
+                            {% for map in maps %}
+                                <tr>
+                                    <td>{{ map.name }}</td>
+                                    <td><a href="{{ map.link}}" target="_blank"><button class="btn btn-outline-light">link</button></a></td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
                     </table>
                 </div>
 
                 <div class="col">
                     <h3>objects</h3>
                     <table class="table table-hover table-dark">
-                        <tr>
-                            <th>name</th>
-                            <th>description</th>
-                        </tr>
-                        {% for object in objects %}
+                        <thead>
                             <tr>
-                                <td>{{ object.name }}</td>
-                                <td>{{ object.description }}</td>
+                                <th>name</th>
+                                <th>description</th>
                             </tr>
-                        {% endfor %}
+                        </thead>
+                        <tbody>
+                            {% for object in objects %}
+                                <tr>
+                                    <td>{{ object.name }}</td>
+                                    <td>{{ object.description }}</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
                     </table>
                 </div>
 
                 <div class="col">
                     <h3>weapons</h3>
                     <table class="table table-hover table-dark">
-                        <tr>
-                            <th>name</th>
-                            <th>hands</th>
-                            <th>damage</th>
-                            <th>family</th>
-                        </tr>
-                        {% for weapon in weapons %}
+                        <thead>
                             <tr>
-                                <td>{{ weapon.name }}</td>
-                                <td>{{ weapon.hands }}</td>
-                                <td>{{ weapon.damage }}</td>
-                                <td>{{ weapon.family_name }}</td>
+                                <th>name</th>
+                                <th>hands</th>
+                                <th>damage</th>
+                                <th>family</th>
                             </tr>
-                        {% endfor %}
+                        </thead>
+                        <tbody>
+                            {% for weapon in weapons %}
+                                <tr>
+                                    <td>{{ weapon.name }}</td>
+                                    <td>{{ weapon.hands }}</td>
+                                    <td>{{ weapon.damage }}</td>
+                                    <td>{{ weapon.family_name }}</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
                     </table>
                 </div>
             </div>
