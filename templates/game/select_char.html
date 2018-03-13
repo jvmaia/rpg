@@ -23,20 +23,17 @@
               <td> {{ char.klass }} </td>
               <td> {{ char.breed }} </td>
               <td> {{ char.level }} </td>
-              <td><a onclick="selectChar('{{char.name}}')" href=""><button type="button" class="btn btn-outline-light">this</button></a></td>
+              <td><a onclick="selectChar('{{char.name}}')" href="" class="btn btn-outline-light">this</a></td>
           </tr>
         {% endfor %}
         </tbody>
       </table>
     </div>
   </div>
-  <div class="row">
-    <div class="col">
-      <a onclick="remove_char()" href="/game/logout" class="btn btn-outline-dark"> logout </a>
-    </div>
-  </div>
 </div>
-</div>
+
+<a onclick="remove_char()" href="/game/logout" class="nav justify-content-center"><button class="btn btn-outline-dark">logout</button></a>
+
 </body>
 <script src="{% static 'game/js/select_char.js' %}"></script>
 {% endblock %}
