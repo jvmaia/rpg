@@ -9,9 +9,12 @@ function slugify(text) {
 
 function levelup_char(char_id) {
     axios.get('/game/'+char_id+'/levelup')
-        .then(function(response) {
-            alert(response.data);
+        .then(function (response) {
+            alert(response.data.message);
             location.reload();
+        })
+        .catch(function (error) {
+            console.log(error);
         })
 };
 
@@ -20,8 +23,8 @@ function applyDifference() {
     char_name = document.getElementById('char_name').value;
     char_name = slugify(char_name);
     axios.get('/game/'+char_name+'/'+difference+'/applydifference')
-        .then(function(response) {
-            alert(response.data);
+        .then(function (response) {
+            alert(response.data.message);
             location.reload();
         })
         .catch(function (error) {
@@ -35,8 +38,8 @@ function giveItem() {
     item_name = slugify(item);
    char_name = slugify(char);
     axios.get('/game/'+char_name+'/'+item_name+'/giveitem')
-        .then(function(response) {
-            alert(response.data);
+        .then(function (response) {
+            alert(response.data.message);
             location.reload();
         })
         .catch(function (error) {

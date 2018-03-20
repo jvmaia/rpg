@@ -1,5 +1,5 @@
 from django.shortcuts import get_object_or_404, render
-from django.http import HttpResponse, HttpResponseNotFound
+from django.http import HttpResponse, HttpResponseNotFound, JsonResponse
 from .models import Char, Map, Object, Weapon, Weapons_family
 from django.contrib.auth.decorators import login_required
 
@@ -59,7 +59,9 @@ def char_profile(request, char_name):
     try:
         char = Char.objects.get(slug=char_name)
     except:
-        return HttpResponse('Char not found')
+        return JsonResponse({
+            'message': 'Char not found'
+        })
 
     weapons = list(char.weapons.values())
     for weapon in weapons:
@@ -82,19 +84,25 @@ def char_levelup(request, char_id):
     char = get_object_or_404(Char, pk=char_id)
     char.level += 1
     char.save()
-    return HttpResponse("Char %s arrived to a new level" % (char.name), content_type="text/plain")
+    return JsonResponse({
+        'message': 'Char %s arrived to a new level' % (char.name)
+    })
 
 
 def char_applyDamage(request, char_name, difference):
     try:
         char = Char.objects.get(slug=char_name)
     except:
-        return HttpResponse('Char not found')
+        return JsonResponse({
+            'message': 'Char not found'
+        })
 
     try:
         difference = int(difference)
     except:
-        return HttpResponse('Invalid number')
+        return JsonResponse({
+            'message': 'Invalid number'
+        })
 
     if difference > 0 and char.actual_life + difference > char.life:
         char.actual_life = char.life
@@ -104,14 +112,18 @@ def char_applyDamage(request, char_name, difference):
         char.actual_life += difference
 
     char.save()
-    return HttpResponse("Char %s new life: %i" % (char.name, char.actual_life), content_type="text/plain")
+    return JsonResponse({
+        'message': "Char %s new life: %i" % (char.name, char.actual_life)
+    })
 
 
 def char_giveItem(request, char_name, item_name):
     try:
         char = Char.objects.get(slug=char_name)
     except:
-        return HttpResponse('Char not found')
+        return JsonResponse({
+            'message': 'Char not found'
+        })
 
     try:
         item = Object.objects.get(slug=item_name)
@@ -119,11 +131,15 @@ def char_giveItem(request, char_name, item_name):
         try:
             item = Weapon.objects.get(slug=item_name)
         except:
-            return HttpResponse('Item not found')
+            return JsonResponse({
+                'message': 'Item not found'
+            })
 
     if isinstance(item, Object):
         char.bag.add(item)
     else:
         char.weapons.add(item)
 
-    return HttpResponse('Char received a new item')
+    return JsonResponse({
+        'message': 'Char %s received the item %s' % (char.name, item.name)
+    })
