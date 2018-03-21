@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
-<body>
+<body class="bg-secondary">
 <div class="container">
   <div class="row">
     <div class="col">
@@ -32,7 +32,7 @@
   </div>
 </div>
 
-<a onclick="remove_char()" href="/game/logout" class="nav justify-content-center"><button class="btn btn-outline-dark">logout</button></a>
+<a onclick="remove_char()" href="/game/logout" class="nav justify-content-center"><button class="btn btn-outline-light">logout</button></a>
 
 </body>
 <script src="{% static 'game/js/select_char.js' %}"></script>

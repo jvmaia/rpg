@@ -112,7 +112,7 @@
                     <input type="text" class="form-control" id="char_name" placeholder="Char name">
                     <input type="number" class="form-control" id="difference" placeholder="-N to damage; N to heal">
                 </div>
-                <button onclick="applyDifference()" class="btn btn-outline-dark">Apply</button>
+                <button onclick="applyDifference()" class="btn btn-outline-light">Apply</button>
 
                 <p><h4>Give item:</h4></p>
                 <div class="input-group mb-3">
@@ -122,7 +122,7 @@
                     <input type="text" class="form-control" id="char_name01" placeholder="Char name">
                     <input type="text" class="form-control" id="item_name" placeholder="Item name">
                 </div>
-                <button onclick="giveItem()" class="btn btn-outline-dark">Give</button>
+                <button onclick="giveItem()" class="btn btn-outline-light">Give</button>
             </div>
         </div>
     {% endif %}
@@ -130,4 +130,5 @@
 
 {% block after_body %}
     <script src="{% static 'game/js/master.js' %}"></script>
+    <link href="{% static 'game/css/master.css' %}" rel="stylesheet">
 {% endblock %}

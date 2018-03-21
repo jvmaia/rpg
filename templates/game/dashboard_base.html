@@ -10,28 +10,30 @@
   <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet">
 </head>
 <body>
+<div class="bg-secondary">
   {% block content %}
   {% endblock %}
   <br/>
   <div class="container">
     <div class="row">
       <div class="col">
-        <a class="btn btn-outline-dark" href="/chat">go chat</a>
+        <a class="btn btn-outline-light" href="/chat">go chat</a>
       </div>
       {% if user.master %}
         <div class="col">
-          <a class="btn btn-outline-dark" href="/game/logout">logout</a>
+          <a class="btn btn-outline-light" href="/game/logout">logout</a>
         </div>
       {% else %}
         <div class="col">
-          <a onclick="remove_char()" class="btn btn-outline-dark" href="/game/player">select other char</a>
+          <a onclick="remove_char()" class="btn btn-outline-light" href="/game/player">select other char</a>
         </div>
         <div class="col">
-          <a onclick="remove_char()" class="btn btn-outline-dark" href="/game/logout">logout</a>
+          <a onclick="remove_char()" class="btn btn-outline-light" href="/game/logout">logout</a>
         </div>
       {% endif %}
     </div>
   </div>
+</div>
 </body>
 {% block after_body %}
 {% endblock %}
