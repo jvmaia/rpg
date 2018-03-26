@@ -143,3 +143,39 @@ def char_giveItem(request, char_name, item_name):
     return JsonResponse({
         'message': 'Char %s received the item %s' % (char.name, item.name)
     })
+
+
+def item_transfer(request, source_char, target_char, item_name):
+    try:
+        source_char = Char.objects.get(slug=source_char)
+        target_char = Char.objects.get(slug=target_char)
+    except:
+        return JsonResponse({
+            'message': 'Char not found'
+        })
+
+    try:
+        item = Object.objects.get(slug=item_name)
+    except:
+        try:
+            item = Weapon.objects.get(slug=item_name)
+        except:
+            return JsonResponse({
+                'message': 'Item not found'
+            })
+
+    if {'slug': item.slug} in source_char.bag.values('slug'):
+        source_char.bag.remove(item)
+        target_char.bag.add(item)
+    elif {'slug': item.slug} in source_char.weapons.values('slug'):
+        source_char.weapons.remove(item)
+        target_char.weapons.add(item)
+    else:
+        return JsonResposne({
+            'message': "source char doesn't have this item"
+        })
+
+    return JsonResponse({
+        'message': 'Char %s transferred the item %s to the char %s' %
+        (source_char.name, item.name, target_char.name)
+    })
