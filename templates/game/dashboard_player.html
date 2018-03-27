@@ -1,4 +1,5 @@
 {% extends 'game/dashboard_base.html' %}
+{% load static %}
 
 {% block content %}
     <h1 class="text-center"> you're logged in dashboard as {{ char.name }}</h1>
@@ -151,6 +152,22 @@
                 </table>
             </div>
         </div>
+
+        <div id="actions">
+            <p><h4>Transfer item:</h4></p>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="basic-addon1">Target char and item</span>
+                    </div>
+                    <input type="text" class="form-control" id="char_name" placeholder="Char name">
+                    <input type="text" class="form-control" id="item_name" placeholder="Item name">
+                </div>
+            <button onclick="transferItem()" class="btn btn-outline-light">Transfer</button>
+        </div>
     </div>
 
+{% endblock %}
+
+{% block after_body %}
+    <script src="{% static 'game/js/player.js' %}"></script>
 {% endblock %}

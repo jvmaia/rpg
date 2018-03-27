@@ -4,9 +4,8 @@
 <head>
   {% if not user.master %}
     <script src="{% static 'game/js/logout.js' %}"></script>
-  {% else %}
-    <script src="{% static 'js/axios.min.js' %}"></script>
   {% endif %}
+  <script src="{% static 'js/axios.min.js' %}"></script>
   <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet">
 </head>
 <body>
