@@ -146,6 +146,11 @@ def char_giveItem(request, char_name, item_name):
 
 
 def item_transfer(request, source_char, target_char, item_name):
+    if source_char == target_char:
+        return JsonResponse({
+            'message': 'You cannot transfer an item to yourself'
+        })
+
     try:
         source_char = Char.objects.get(slug=source_char)
         target_char = Char.objects.get(slug=target_char)
@@ -172,7 +177,7 @@ def item_transfer(request, source_char, target_char, item_name):
         target_char.weapons.add(item)
     else:
         return JsonResposne({
-            'message': "source char doesn't have this item"
+            'message': "Source char doesn't have this item"
         })
 
     return JsonResponse({
